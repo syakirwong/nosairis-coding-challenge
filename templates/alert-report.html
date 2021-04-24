@@ -1,0 +1,27 @@
+{% extends 'base.html'%} {% block content%}
+<h1>Alert Report</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Switch</th>
+      <th>Alert Type</th>
+      <th>Alert Date/Time</th>
+      <th>Email Notification Date/Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in data %}
+    <tr>
+      <td>{{item.id}}</td>
+      <td>SW-{{item.SW}}</td>
+      <td>{{item.alert_type}}</td>
+      <td>{{item.alert_datetime|date:"d/m/Y h:i:s A" }}</td>
+      <td>{{item.email_alert_datetime|date:"d/m/Y h:i:ss A" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

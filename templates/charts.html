@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block content %}
+
+<h4>SW-S1 Ping Availability</h4>
+<canvas id="S1" width="900" height="200"></canvas>
+<h4>SW-S2 Ping Availability</h4>
+<canvas id="S2" width="900" height="200"></canvas>
+<h4>SW-S3 Ping Availability</h4>
+<canvas id="S3" width="900" height="200"></canvas>
+
+<script>
+  let S3Time = [], S2Time = [], S1Time =  []
+   for (i=0; i<{{S3_labels}}.length; i++){S3Time.push(new Date({{S3_labels}}[i]*1000).toLocaleString())}
+   for (i=0; i<{{S2_labels}}.length; i++){S2Time.push(new Date({{S2_labels}}[i]*1000).toLocaleString())}
+   for (i=0; i<{{S1_labels}}.length; i++){S1Time.push(new Date({{S1_labels}}[i]*1000).toLocaleString())}
+  let S1_config = {
+    type: 'line',
+    data: {
+        datasets:
+            [{
+                data: {{ S1_data }},
+    borderColor: ['#dede7a'],
+    borderWidth: 1,
+    pointStyle: 'line',
+    label: 'ICMP Ping'
+  }],
+    labels: S1Time
+    },
+  };
+
+  let S2_config = {
+    type: 'line',
+    data: {
+        datasets:
+            [{
+                data: {{ S2_data }},
+    borderColor: ['#31edfd'],
+    borderWidth: 1,
+    pointStyle: 'line',
+    label: 'ICMP Ping'
+  }],
+    labels: S2Time
+    },
+
+  };
+
+  let S3_config = {
+    type: 'line',
+    data: {
+        datasets:
+            [{
+                  data: {{ S3_data }},
+                  borderColor: ['#698969'],
+                  borderWidth: 1,
+                  pointStyle: 'line',
+                  label: 'ICMP Ping'
+            }],
+    labels: S3Time
+    },
+  };
+
+  window.onload = function () {
+    var ctx1 = document.getElementById('S1').getContext('2d');
+    var ctx2 = document.getElementById('S2').getContext('2d');
+    var ctx3 = document.getElementById('S3').getContext('2d');
+    window.myPie = new Chart(ctx1, S1_config);
+    window.myPie = new Chart(ctx2, S2_config);
+    window.myPie = new Chart(ctx3, S3_config);
+  };
+</script>
+
+{% endblock content %}

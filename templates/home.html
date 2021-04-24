@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Hello</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Switch Label</th>
+      <th>Terminal 1</th>
+      <th>Terminal 2</th>
+      <th>Terminal 3</th>
+      <th>Terminal 4</th>
+      <th>Terminal 5</th>
+      <th>Unix Timestamp</th>
+      <th>Switch Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in data %}
+    <tr>
+      <td>{{d.id}}</td>
+      <td>{{d.SW}}</td>
+      <td>{{d.T1}}</td>
+      <td>{{d.T2}}</td>
+      <td>{{d.T3}}</td>
+      <td>{{d.T4}}</td>
+      <td>{{d.T5}}</td>
+      <td>{{d.TS}}</td>
+      <td>{{d.status}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
